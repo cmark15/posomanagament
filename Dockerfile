@@ -35,11 +35,14 @@ RUN composer install --no-dev --no-scripts --ignore-platform-reqs
 COPY . .
 
 # Create necessary directories and files
-RUN mkdir -p database storage/logs && \
+RUN mkdir -p database storage/logs bootstrap/cache storage/framework/cache storage/framework/sessions storage/framework/views && \
     cp .env.example .env && \
     sed -i 's/APP_ENV=local/APP_ENV=production/' .env && \
     sed -i 's/APP_DEBUG=true/APP_DEBUG=false/' .env && \
     touch database/database.sqlite
+
+# Set proper permissions for Laravel directories
+RUN chmod -R 775 storage bootstrap/cache
 
 # Generate app key and complete setup
 RUN php artisan key:generate --force && \
