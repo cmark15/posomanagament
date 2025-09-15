@@ -59,5 +59,17 @@ RUN chmod -R 755 storage bootstrap/cache && \
 # Expose port (Railway will set the PORT environment variable)
 EXPOSE $PORT
 
+# Create a startup script
+RUN echo '#!/bin/bash\n\
+# Run any startup commands\n\
+php artisan config:clear\n\
+php artisan route:clear\n\
+php artisan view:clear\n\
+\n\
+# Start the server from the public directory\n\
+cd /app\n\
+php artisan serve --host=0.0.0.0 --port=${PORT:-8000}\n\
+' > /app/start.sh && chmod +x /app/start.sh
+
 # Start the application
-CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+CMD ["/app/start.sh"]
