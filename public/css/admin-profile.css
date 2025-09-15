@@ -1,0 +1,151 @@
+/* ===========================
+   Admin Profile – Minimalist UI
+   Scopes to #admin-profile (fallback provided)
+   =========================== */
+
+:root{
+  --poso-green:#0b8a5d;
+  --ink-900:#0f172a;
+  --ink-700:#334155;
+  --ink-500:#64748b;
+  --border:#e5e7eb;
+  --muted:#f8fafc;
+  --radius:14px;
+  --shadow:0 8px 24px rgba(16,24,40,.08);
+  --shadow-sm:0 4px 12px rgba(16,24,40,.06);
+  --header-h:64px;
+}
+
+/* ===== Scope root (preferred) ===== */
+#admin-profile{
+  min-height: calc(100vh - var(--header-h)) !important; /* override inline 70px if present */
+  padding: clamp(1rem, 2vw, 2rem);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Fallback if you didn't add the ID: target a single centered card page */
+main.content > .container:has(> .card){ padding: clamp(1rem, 2vw, 2rem); }
+
+/* ===== Card wrapper ===== */
+#admin-profile .card,
+main.content > .container .card{
+  max-width: 560px;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  background:#fff;
+}
+
+/* ===== Header (solid, no gradient) ===== */
+#admin-profile .card-header,
+main.content > .container .card .card-header{
+  background: var(--poso-green) !important;
+  color:#fff !important;
+  border: 0 !important;
+  text-align:center;
+  padding: .9rem 1.1rem;
+  font-weight: 800;
+  letter-spacing:.2px;
+}
+
+/* ===== Body ===== */
+#admin-profile .card-body,
+main.content > .container .card .card-body{
+  padding: 1.25rem 1.25rem 1.5rem;
+  background:#fff;
+}
+
+/* Alerts */
+#admin-profile .alert,
+main.content > .container .card .alert{
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+/* ===== Labels & Inputs ===== */
+#admin-profile .form-label,
+main.content > .container .card .form-label{
+  font-weight: 700;
+  color: var(--ink-700);
+  margin-bottom: .35rem;
+}
+
+#admin-profile .form-control,
+main.content > .container .card .form-control{
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: .65rem .85rem;
+  font-size: 1rem;
+  color: var(--ink-900);
+  transition: border-color .12s ease, box-shadow .12s ease, background-color .12s ease;
+  background:#fff;
+}
+
+#admin-profile .form-control::placeholder,
+main.content > .container .card .form-control::placeholder{
+  color: #94a3b8; /* slate-400 */
+}
+
+#admin-profile .form-control:focus,
+main.content > .container .card .form-control:focus{
+  border-color: #0b8a5d;
+  box-shadow: 0 0 0 .2rem rgba(11,138,93,.15);
+}
+
+/* Validation feedback stronger */
+#admin-profile .invalid-feedback,
+main.content > .container .card .invalid-feedback{
+  font-weight: 600;
+}
+
+/* ===== Input group (show/hide password) ===== */
+#admin-profile .input-group .form-control{
+  border-right: 0;
+  border-radius: 12px 0 0 12px;
+}
+#admin-profile .input-group .btn{
+  border-color: var(--border);
+  border-left: 0;
+  border-radius: 0 12px 12px 0;
+  background: var(--muted);
+  color: var(--ink-700);
+  transition: background .12s ease, transform .12s ease, box-shadow .12s ease;
+}
+#admin-profile .input-group .btn:hover{
+  background:#eef2f7;
+}
+
+/* ===== Submit button ===== */
+#admin-profile .btn-success,
+main.content > .container .card .btn-success{
+  background: var(--poso-green);
+  border-color: var(--poso-green);
+  font-weight: 800;
+  border-radius: 12px;
+  padding: .75rem 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+#admin-profile .btn-success:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(16,24,40,.12);
+}
+
+/* Subtle spacing between fields */
+#admin-profile .mb-3,
+main.content > .container .card .mb-3{
+  margin-bottom: 1rem !important;
+}
+
+/* ===== Responsive: compact on small screens ===== */
+@media (max-width: 575.98px){
+  #admin-profile{ align-items: flex-start; }
+  #admin-profile .card{ border-radius: 12px; }
+}
+
+/* ===== If Bootstrap contextual header classes leak in, neutralize gradients (safety) ===== */
+#admin-profile .card-header.bg-success{ background-color: var(--poso-green) !important; background-image: none !important; }

@@ -1,0 +1,216 @@
+/* ===========================
+   Admin Dashboard — Modern Daily Look
+   (no markup changes required)
+   =========================== */
+
+:root{
+  --dash-radius: 16px;
+  --dash-shadow: 0 12px 30px rgba(16,24,40,.12);
+  --dash-shadow-hover: 0 16px 40px rgba(16,24,40,.16);
+  --dash-muted: #f1f5f9;          /* slate-100 */
+  --dash-muted-2: #e9ecef;        /* gray-200 */
+  --dash-accent: #0b8a5d;         /* POSO green accent */
+  --dash-text-600: #334155;       /* slate-700 */
+}
+
+/* Container breathing room */
+.container-fluid.py-4{
+  background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+}
+
+/* ===== Summary Cards (top row) ===== */
+.row.g-4 .card{
+  border: 0;
+  border-radius: var(--dash-radius);
+  box-shadow: var(--dash-shadow);
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+  overflow: hidden;
+}
+
+.row.g-4 .card:hover{
+  transform: translateY(-3px);
+  box-shadow: var(--dash-shadow-hover);
+  filter: saturate(1.02);
+}
+
+/* Gradient upgrades for existing Bootstrap contextual cards */
+.card.bg-primary{
+  background: linear-gradient(135deg, #0d6efd 0%, #4dabf7 100%) !important;
+}
+.card.bg-warning{
+  background: linear-gradient(135deg, #f59f00 0%, #ffa94d 100%) !important;
+}
+
+/* Icon + number polish */
+.card .card-body i{
+  opacity: .92;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.15));
+}
+.card .card-body h6.card-title{
+  letter-spacing:.02em;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: .9;
+  margin-bottom:.25rem;
+}
+.card .card-body h6.card-title::after{
+  content: " • Today";
+  font-size: .75rem;
+  font-weight: 700;
+  background: rgba(255,255,255,.22);
+  padding: .2rem .5rem;
+  border-radius: 999px;
+  margin-left: .5rem;
+}
+.card .card-body h2{
+  font-weight: 800;
+  letter-spacing:-0.5px;
+  margin: 0;
+}
+
+/* Make the whole summary card feel tappable */
+a[data-ajax] .card{
+  color: #fff !important;
+}
+
+/* ===== Section Cards (tables) ===== */
+.card.shadow-sm{
+  border: 0;
+  border-radius: var(--dash-radius);
+  box-shadow: var(--dash-shadow);
+}
+
+.card-header{
+  border: 0 !important;
+  background: #fff !important;
+  padding: 1rem 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  border-top-left-radius: var(--dash-radius);
+  border-top-right-radius: var(--dash-radius);
+}
+
+.card-header h5{
+  font-weight: 800;
+  color: var(--dash-text-600);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* Add a soft “Today” pill after section titles */
+.card-header h5::after{
+  content: "Today";
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--dash-accent);
+  background: color-mix(in oklab, var(--dash-accent) 12%, white);
+  padding: .25rem .55rem;
+  border-radius: 999px;
+}
+
+/* View more link as a micro-button */
+.card-header a{
+  font-weight: 600;
+  font-size: .85rem;
+  color: #0f172a; /* slate-900 */
+  background: var(--dash-muted);
+  padding: .35rem .7rem;
+  border-radius: 999px;
+  transition: background .2s ease, transform .2s ease;
+  text-decoration: none;
+}
+.card-header a:hover{
+  background: var(--dash-muted-2);
+  transform: translateY(-1px);
+}
+
+/* ===== Tables (modernize) ===== */
+.table{
+  margin: 0;
+  --bs-table-bg: transparent;
+  --bs-table-color: #0f172a;
+}
+
+.table thead th{
+  position: sticky;
+  top: 64px; /* sits just under .card-header sticky area */
+  background: #f8fafc; /* slate-50 */
+  color: #334155;      /* slate-700 */
+  font-weight: 700;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.06);
+  z-index: 4;
+}
+
+.card .table thead th:first-child{
+  border-top-left-radius: 10px;
+}
+.card .table thead th:last-child{
+  border-top-right-radius: 10px;
+}
+
+.table td, .table th{
+  padding: .9rem 1.1rem;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.table tbody tr{
+  transition: background-color .15s ease;
+}
+.table tbody tr:hover{
+  background: #f1f5f9; /* slate-100 */
+}
+
+/* Soft zebra without harsh borders */
+.table-striped > tbody > tr:nth-of-type(odd) > *{
+  background: #fafbfd;
+}
+
+/* Scroll area for cards with tables */
+.card-body.p-0{
+  max-height: 420px;
+  overflow: auto;
+}
+
+/* Nice scrollbars */
+.card-body.p-0::-webkit-scrollbar{
+  width: 10px;
+  height: 10px;
+}
+.card-body.p-0::-webkit-scrollbar-thumb{
+  background: #cbd5e1; /* slate-300 */
+  border-radius: 8px;
+}
+.card-body.p-0::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+/* ===== Micro interaction tweaks ===== */
+.small.text-decoration-none.text-left{
+  text-underline-offset: 3px;
+}
+
+.bi{
+  transition: transform .2s ease;
+}
+.card:hover .bi{
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* ===== Responsive polish ===== */
+@media (max-width: 991.98px){
+  .row.g-4 .card .card-body{
+    padding: 1.1rem .95rem;
+  }
+  .card .card-body i{
+    font-size: 2.2rem !important;
+  }
+  .card .card-body h2{
+    font-size: 1.6rem;
+  }
+  .card-header{
+    top: 0; /* sticky still works inside card scroll */
+  }
+}

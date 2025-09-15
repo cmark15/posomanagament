@@ -1,0 +1,33 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>OCR Smoke Test</title>
+<pre id="out">Starting…</pre>
+<script src="/vendor/tesseract/tesseract.min.js"></script>
+
+<script>
+(async () => {
+  const out = document.getElementById('out');
+  const log = (m) => out.textContent += "\n" + m;
+
+  try {
+    const worker = await Tesseract.createWorker({
+      workerPath: "/vendor/tesseract/worker.min.js",
+      corePath:   "/vendor/tesseract/tesseract-core.wasm",
+      langPath:   "/vendor/tesseract",
+      gzip:       true
+    });
+    log('Worker created');
+    await worker.loadLanguage('eng'); log('Language loaded');
+    await worker.initialize('eng');   log('Worker initialized');
+
+    const tiny = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAPElEQVQYV2P8z8Dwn4EIwDiQkJAFGJgYjKRDUMiEQg0QW0gGmQYQ0jQYBzYkCqCw0QBrYwBgaQkAE3AigAAbJjB5nJ8l1QAAAABJRU5ErkJggg==";
+    const r1 = await worker.recognize(tiny);
+    log("Inline PNG says: " + JSON.stringify(r1.data.text.trim()));
+    await worker.terminate(); log('Done');
+  } catch (e) {
+    log("ERROR: " + e.message);
+    console.error(e);
+  }
+})();
+</script>
+

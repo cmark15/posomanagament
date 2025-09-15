@@ -1,0 +1,281 @@
+/* ===============================
+   POSO Admin Layout — Minimal UI (no gradients)
+   =============================== */
+
+:root{
+  --poso-green:#0b8a5d;
+  --ink-900:#0f172a;
+  --ink-700:#334155;
+  --ink-500:#64748b;
+  --border:#e5e7eb;
+  --muted:#f8fafc;
+  --radius:14px;
+  --shadow:0 8px 24px rgba(16,24,40,.08);
+  --shadow-sm:0 4px 12px rgba(16,24,40,.06);
+  --header-h:64px;
+}
+
+/* Base */
+html, body{
+  background:#ffffff;
+  color: var(--ink-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Top Navigation ===== */
+.top-nav{
+  height: var(--header-h);
+  padding:.75rem 1.25rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  color:#fff;
+  background: var(--poso-green);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top:0;
+  z-index:1030;
+}
+.top-nav a{ color:#fff; text-decoration:none; }
+.top-nav a:hover{ opacity:.95; }
+#currentDateTime{ opacity:.95; font-weight:600; white-space:nowrap; }
+
+.top-nav form#logoutForm button{
+  background: rgba(255,255,255,.12);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.22);
+  padding:.45rem .8rem; border-radius:999px;
+  font-weight:700; cursor:pointer;
+  transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}
+.top-nav form#logoutForm button:hover{
+  background: rgba(255,255,255,.2);
+  transform: translateY(-1px);
+}
+.top-nav .d-flex.gap-3 a{
+  background: rgba(255,255,255,.1);
+  padding:.4rem .65rem; border-radius:999px;
+  display:inline-flex; align-items:center; gap:.35rem;
+}
+.top-nav .d-flex.gap-3 a:hover{ background: rgba(255,255,255,.18); }
+
+/* ===== Subtle watermark (desktop only) ===== */
+.half-bg-image{
+  position: fixed; top: var(--header-h); right: 0;
+  width: min(40vw, 480px); opacity: .035; pointer-events:none;
+  z-index:0; filter: grayscale(100%) contrast(110%);
+}
+.half-bg-image img{ width:100%; height:auto; display:block; }
+@media (max-width: 991.98px){ .half-bg-image{ display:none; } }
+
+/* ===== Shell: sidebar + content ===== */
+body > .d-flex{
+  min-height: calc(100vh - var(--header-h));
+  position: relative; z-index:1;
+}
+
+/* ===== Sidebar ===== */
+.sidebar{
+  width: 272px; 
+  background:#fff; border-right:1px solid var(--border);
+  padding: 1rem; position: sticky; top: var(--header-h);
+  height: calc(100vh - var(--header-h)); overflow:auto;
+}
+.sidebar img{
+  width: 110px; aspect-ratio: 1/1; object-fit: contain;
+  display:block; margin: 0 auto 1rem;
+}
+.sidebar .nav{ gap:.35rem; }
+
+.sidebar .nav-link{
+  display:flex; 
+  align-items:center; 
+  gap: 1rem;
+  
+  color: var(--ink-700);
+  font-weight:600; 
+  border-radius: 10px;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+.sidebar .nav-link .bi{ font-size:1.05rem; opacity:.95; }
+.sidebar .nav-link:hover{ background:#f3f4f6; }
+
+/* Active — supports .active and aria-current="page" */
+.sidebar .nav-link.active,
+.sidebar .nav-link[aria-current="page"]{
+  background:#0b8a5d; color:#fff;
+}
+.sidebar .nav-link.active .bi,
+.sidebar .nav-link[aria-current="page"] .bi{ color:#fff; }
+
+/* ===== Main content ===== */
+
+
+/* ===== Cards ===== */
+.card{
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.card .card-header{
+  background:#fff;
+  border-bottom:1px solid var(--border) !important;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+}
+.card a, .card button{ transition: transform .15s ease, box-shadow .15s ease; }
+.card a:hover, .card button:hover{ transform: translateY(-1px); }
+
+/* ===== Tables ===== */
+.card .table{ margin:0; }
+.card .table thead th{
+  position: sticky; top:0; z-index:2;
+  background:#f8fafc; color: var(--ink-700); font-weight:700;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.06);
+}
+.card .table tbody tr:hover{ background:#f6f7fb; }
+.card .card-body.p-0{ max-height:70vh; overflow:auto; }
+
+/* ===== Utilities ===== */
+.text-muted-white{ color: rgba(255,255,255,.9); }
+.round{ border-radius:999px; }
+
+/* ===== Responsive ===== */
+@media (max-width: 1199.98px){ .sidebar{ width:260px; } }
+@media (max-width: 991.98px){
+  #currentDateTime{ display:none; }
+  .top-nav{ padding:.65rem .9rem; }
+}
+@media (max-width: 575.98px){
+  .top-nav{ height:auto; min-height: var(--header-h); flex-wrap:wrap; row-gap:.5rem; }
+  .top-nav .d-flex.gap-3{ gap:.5rem; }
+  .top-nav form#logoutForm button{ padding:.4rem .7rem; }
+}
+
+/* ===== Custom scrollbars (WebKit) ===== */
+.sidebar::-webkit-scrollbar,
+.card .card-body.p-0::-webkit-scrollbar{
+  width:10px; height:10px;
+}
+.sidebar::-webkit-scrollbar-thumb,
+.card .card-body.p-0::-webkit-scrollbar-thumb{
+  background:#cbd5e1; border-radius:8px;
+}
+.sidebar::-webkit-scrollbar-track,
+.card .card-body.p-0::-webkit-scrollbar-track{
+  background:transparent;
+}
+/* Hide sidebar when body has .no-sidebar (AJAX profile page) */
+.no-sidebar .sidebar{ display:none !important; }
+/* Ensure content uses full width when sidebar is hidden */
+.no-sidebar #app-body{ width:100%; }
+
+/* Neutralize any accidental gradients on context cards */
+.card.bg-primary{ background-color:#0d6efd !important; background-image:none !important; }
+.card.bg-warning{ background-color:#f59f00 !important; background-image:none !important; }
+
+/* full-page overlay used by ajax.js */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,.6);
+  display: grid;
+  place-items: center;
+  z-index: 2000;
+}
+/* === NEW: Content area now targets #app-body (since <main> was removed) === */
+#app-body{
+  flex: 1 1 auto;
+  min-width: 0;                 /* fixes overflow with long tables/cards */
+  background: #fafafa;
+  padding: clamp(1rem, 2vw + .5rem, 2rem);
+}
+
+/* Give consistent vertical rhythm to common first-level children */
+#app-body > .container,
+#app-body > .container-fluid,
+#app-body > .row,
+#app-body > .card,
+#app-body > section {
+  margin-bottom: 1rem;
+}
+
+/* Tables inside content: prevent overflow on small screens */
+#app-body .table{
+  width: 100%;
+}
+#app-body .table th,
+#app-body .table td{
+  word-break: break-word;
+  vertical-align: middle;
+}
+
+/* When profile page hides the sidebar, let content span full width */
+.no-sidebar #app-body{
+  width: 100%;
+}
+
+/* Shell tweaks when sidebar collapses (mobile) */
+@media (max-width: 767.98px){
+  body > .d-flex{ display: block; }    /* no leftover flex spacing */
+  .sidebar{ display: none !important; }/* hard-hide just in case */
+  #app-body{ padding: 1rem; }          /* tighter padding on phones */
+}
+
+/* Slightly bigger padding on wider screens */
+@media (min-width: 992px){
+  #app-body{ padding: 2rem; }
+}
+
+/* Optional: keep cards/tables comfortable inside a scrollable area */
+.card .card-body.p-0{
+  max-height: 70vh;
+  overflow: auto;
+}
+
+/* Keep media responsive inside content */
+#app-body img,
+#app-body svg,
+#app-body video,
+#app-body canvas,
+#app-body iframe{
+  max-width: 100%;
+  height: auto;
+}
+/* Make sticky header work in the Violator history modal */
+#violatorModal .modal-dialog-scrollable .modal-body {
+  overflow-y: auto;             /* modal body is the vertical scroller */
+}
+
+/* Important: let the modal body be the vertical scroll container.
+   Bootstrap's .table-responsive sets overflow-x:auto; which turns it
+   into a "scroll container" and breaks sticky on vertical scroll.
+   This restores vertical flow so sticky locks to the modal body. */
+#violatorModalBody .table-responsive {
+  overflow-y: visible !important;
+}
+
+/* Stick the header to the top of the modal body */
+#violatorModalBody .table thead th {
+  position: sticky;
+  top: 0;                       /* top of the modal body */
+  z-index: 2;                   /* above table rows */
+  background: #fff;             /* solid bg so text stays readable */
+  background-clip: padding-box; /* avoid double border effect */
+}
+
+:root { --z-bs-backdrop:1990; --z-bs-modal:2000; --z-swal:3000; }
+.modal-backdrop { z-index: var(--z-bs-backdrop) !important; }
+.modal, .modal.show { z-index: var(--z-bs-modal) !important; }
+.swal2-container { z-index: var(--z-swal) !important; }
+
+/* If you use toast position, cover those containers too (optional) */
+.swal2-container.swal2-top-end,
+.swal2-container.swal2-top-start,
+.swal2-container.swal2-top,
+.swal2-container.swal2-center {
+  z-index: var(--z-swal) !important;
+}

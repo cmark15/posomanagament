@@ -1,0 +1,60 @@
+/* ===== Violation List — Styling ===== */
+#violations-page { position: relative; }
+/* small overlay for violation page partial loads */
+#vioLoading.loading-overlay {
+  position: absolute; inset: 0;
+  display: none;            /* toggled by JS */
+  align-items: center; justify-content: center;
+  background: rgba(255,255,255,.65);
+  z-index: 30;
+}
+
+
+/* toolbar */
+.vio-toolbar{
+  background:#fff; border:1px solid #e5e7eb; border-radius:12px;
+  padding:14px 16px; box-shadow:0 4px 10px rgba(0,0,0,.04);
+}
+
+/* table card */
+.vio-card{
+  background:#fff; border:1px solid #e5e7eb; border-radius:12px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06); overflow:hidden;
+}
+
+/* table */
+.vio-table thead th{
+  position: relative; top:0; z-index:1; background:#f8fafc;
+  font-weight:600; color:#334155;
+}
+.vio-table tbody tr{ transition:background-color .15s ease; }
+.vio-table tbody tr:hover{ background:#f9fbff; }
+.vio-table td,.vio-table th{ vertical-align:middle !important; }
+.table-actions .btn{ margin:0 2px; }
+
+/* category badge (optional look) */
+.badge-cat{
+  background:#eef2ff; color:#3730a3; font-weight:600;
+  padding:.35rem .55rem; border-radius:999px; font-size:.75rem;
+}
+
+/* loading overlay on the table container */
+#violationContainer{ position:relative; }
+#violationContainer.is-loading::after{
+  content:""; position:absolute; inset:0;
+  background:rgba(255,255,255,.7); backdrop-filter:blur(1px);
+}
+#violationContainer.is-loading::before{
+  content:""; position:absolute; top:50%; left:50%;
+  width:2.25rem; height:2.25rem; margin:-1.125rem 0 0 -1.125rem;
+  border-radius:50%; border:3px solid #0d6efd; border-right-color:transparent;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+
+/* responsive trimming */
+@media (max-width:768px){
+  .col-md-only{ display:none !important; }
+}
+

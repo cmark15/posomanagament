@@ -1,0 +1,132 @@
+/* Enforcer Issue Ticket — mobile-first, Bootstrap-friendly */
+
+/* Brand tweaks you can change anytime */
+:root{
+  --brand: #1B5E20;              /* POSO green */
+  --brand-ink: #0d4e15;
+  --surface: #ffffff;
+}
+
+html, body {
+      overflow: auto !important;
+      height: auto !important;
+}
+
+/* Page shell */
+.issue-page{
+  min-height: 100svh;
+  background: #f6f8fa;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Sticky title & Scan ID on top */
+.page-topbar{
+  position: sticky;
+  top: 0;
+  z-index: 101;
+  background: var(--surface);
+  border-bottom: 1px solid var(--bs-border-color);
+  padding: .75rem .25rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.page-title{
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: .2px;
+  font-size: clamp(1.05rem, 1rem + .6vw, 1.35rem);
+}
+.page-topbar .btn{
+  min-height: 44px;
+  border-radius: .75rem;
+}
+
+/* Card finish */
+.ticket-card{
+  max-width: min(920px, 100%);
+  border-radius: 1rem;
+  box-shadow: 0 6px 24px rgba(16,24,40,.08), 0 2px 8px rgba(16,24,40,.06);
+  animation: cardIn .25s ease-out both;
+}
+.ticket-card .card-body{
+  padding: clamp(1rem, 1rem + .8vw, 1.5rem) !important;
+}
+@keyframes cardIn{ from{ transform: translateY(8px); opacity: 0; } to{ transform:none; opacity:1; } }
+
+/* Section header with divider */
+.section-title{
+  display:flex; align-items:center; gap:.5rem;
+  font-weight: 700; margin: 1rem 0 .5rem;
+}
+.section-title::after{
+  content:""; flex:1; height:1px; background: var(--bs-border-color); opacity:.7;
+}
+
+/* Inputs */
+.form-floating>.form-control,
+.form-floating>.form-select{ border-radius:.75rem; }
+.form-control,.form-select{ min-height:48px; }
+textarea.form-control{ min-height: 72px; }
+
+/* Flags row (Resident / Impounded) */
+.flags-row{
+  display:flex; flex-wrap:wrap; gap:.75rem 1rem; padding:.25rem 0 .5rem;
+}
+.flags-row .form-check{ margin: 0; }
+
+/* Violations box (scrollable) */
+.violations-box{
+  border:1px solid var(--bs-border-color);
+  border-radius:.75rem;
+  background: var(--surface);
+  max-height: 44vh; overflow:auto; padding:.25rem .5rem;
+}
+@media (min-width: 768px){ .violations-box{ max-height: 360px; } }
+.violations-box .form-check{
+  padding:.35rem 0; border-bottom:1px dashed rgba(0,0,0,.06);
+}
+.violations-box .form-check:last-child{ border-bottom: 0; }
+
+/* Sticky form actions at bottom of card */
+.form-actions{
+  position: sticky; bottom: 0;
+  background: linear-gradient(to top, var(--surface), rgba(255,255,255,.96) 60%, rgba(255,255,255,0));
+  padding-top: .75rem; margin-top: 1rem;
+}
+.form-actions .btn{
+  min-height: 54px; border-radius:.85rem;
+}
+
+/* Better focus (Bootstrap-compatible) */
+:where(.form-control,.form-select,.btn):focus{
+  box-shadow: 0 0 0 .25rem rgba(25,135,84,.25) !important;
+  outline:none;
+}
+
+/* Modal camera boxes */
+.camera-box{
+  border:1px solid var(--bs-border-color);
+  border-radius:.75rem;
+  background: var(--surface);
+  padding:.5rem;
+}
+#qr-reader, #ocr-video{ width:100%; border-radius:.5rem; }
+#ocr-status{ font-size:.85rem; }
+
+/* Scrollbar polish (WebKit) */
+.violations-box::-webkit-scrollbar{ width: 8px; height:8px; }
+.violations-box::-webkit-scrollbar-thumb{ background: rgba(0,0,0,.15); border-radius:999px; }
+.violations-box::-webkit-scrollbar-thumb:hover{ background: rgba(0,0,0,.28); }
+
+/* Primary button in POSO green without touching Bootstrap theme globally */
+.btn-success{
+  background-color: var(--brand);
+  border-color: var(--brand);
+}
+.btn-success:hover{ background-color: var(--brand-ink); border-color: var(--brand-ink); }
+
+/* Reduce motion preferences */
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; }
+}

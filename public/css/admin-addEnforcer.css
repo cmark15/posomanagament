@@ -1,0 +1,68 @@
+/* ===== Add Enforcer — Page Styling ===== */
+#form-container { position: relative; }
+
+/* Title + back area */
+#form-container .page-head {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:12px;
+}
+#form-container .page-head h2 { margin:0; font-weight:700; letter-spacing:.2px; }
+
+/* Card */
+.form-card {
+  max-width: 860px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+  overflow: hidden;
+}
+
+/* Card header strip */
+.form-card .card-header {
+  background: linear-gradient(135deg,#1b5e20 0%, #2e7d32 45%, #4caf50 100%);
+  color:#fff;
+  padding: 14px 18px;
+  font-weight:600;
+}
+
+/* Inputs */
+.form-card .form-label { font-weight:600; color:#344054; }
+.form-card .input-group-text { background:#f8fafc; }
+
+.form-card .form-control:focus {
+  border-color:#22c55e;
+  box-shadow: 0 0 0 .2rem rgba(34,197,94,.15);
+}
+
+/* Footer */
+.form-card .card-footer {
+  background:#fff;
+  border-top:1px solid #edf2f7;
+}
+
+/* Inline help */
+.form-text { color:#667085; }
+
+/* Loading overlay while submitting */
+.form-card .loading-overlay {
+  position:absolute; inset:0; display:none;
+  align-items:center; justify-content:center;
+  background: rgba(255,255,255,.65);
+  backdrop-filter: blur(2px);
+  z-index: 5;
+}
+.form-card .spinner-border { width:2.25rem; height:2.25rem; }
+
+/* Make sure modals/backdrops always above any page overlays */
+:root{
+  --z-app-overlay: 1500;
+  --z-bs-backdrop: 1990;
+  --z-bs-modal: 2000;
+}
+.modal-backdrop{ z-index: var(--z-bs-backdrop) !important; }
+.modal, .modal.show{ z-index: var(--z-bs-modal) !important; }
+
+/* Responsive tweaks */
+@media (max-width: 576px){
+  .page-head { flex-direction:column; align-items:flex-start; gap:10px; }
+}

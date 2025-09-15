@@ -1,0 +1,176 @@
+/* resources/css/violator.css */
+
+/* --- Fix: allow full page scrolling (overrides global app.css) --- */
+html, body { height: 100%; }
+body {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  background: #f6f7f9;
+}
+
+/* --- Top nav (sticky, mobile-first) --- */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  background: #0b8a5d;
+  color: #fff;
+  padding: .75rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+/* --- Container spacing --- */
+#violator-dashboard {
+  padding: 1rem .75rem 5rem; /* leave room for FAB */
+}
+
+/* --- Profile / greeting card --- */
+.violator-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,.06);
+}
+
+/* --- Section header --- */
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin: 1.25rem 0 .5rem;
+  animation: fadeSlideIn .6s ease;
+}
+.dashboard-header i { font-size: 1.6rem; color: #198754; }
+
+/* --- Help floating action button --- */
+.help-fab {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  padding: .55rem .9rem;
+  border-radius: 9999px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.18);
+  font-weight: 600;
+  z-index: 1080;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.help-fab:hover { transform: translateY(-2px); }
+
+/* Pulse ring */
+.fab-pulse {
+  position: absolute; inset: 0; border-radius: 9999px; pointer-events: none;
+  box-shadow: 0 0 0 0 rgba(25,135,84,.35);
+  animation: fabPulse 2.2s ease-out infinite;
+}
+@keyframes fabPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(25,135,84,.35); }
+  70%  { box-shadow: 0 0 0 16px rgba(25,135,84,0); }
+  100% { box-shadow: 0 0 0 0 rgba(25,135,84,0); }
+}
+
+/* --- Table toolbar --- */
+.table-toolbar {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.table-toolbar .form-control,
+.table-toolbar .form-select { height: 40px; }
+
+/* --- Better table look --- */
+.table-wrap { margin-top: .5rem; }
+.smart-table.table {
+  --row-radius: .8rem;
+  background: #fff;
+  overflow: hidden;
+  border-radius: var(--row-radius);
+}
+.smart-table.table > :not(caption) > * > * {
+  vertical-align: middle;
+}
+.smart-table .status-chip {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .2rem .55rem; border-radius: 9999px; font-size: .75rem; font-weight: 600;
+}
+.status-paid   { background: #eaf9ee; color: #198754; border: 1px solid #bfe8cb; }
+.status-unpaid { background: #fff3cd; color: #8a6d3b; border: 1px solid #f3de9c; }
+
+/* Hover lift */
+.smart-table tbody tr:hover { background: #f7fafc; }
+
+/* --- MOBILE "cardified" table: stack cells with labels --- */
+@media (max-width: 576px) {
+  .smart-table thead { display: none; }
+  .smart-table tbody tr {
+    display: block;
+    margin: .65rem 0;
+    border-radius: .9rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,.05);
+    border: 1px solid #eef2f5;
+    overflow: hidden;
+  }
+  .smart-table tbody tr td {
+    display: flex; justify-content: space-between; gap: .75rem;
+    padding: .65rem .9rem !important; border: 0 !important;
+  }
+  .smart-table tbody tr td::before {
+    content: attr(data-label);
+    font-weight: 600; color: #475569;
+  }
+  .smart-table tbody tr td:last-child { border-bottom: 0; }
+}
+
+/* --- Motion --- */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Modal content stays readable in light theme --- */
+#helpModal .modal-content { background-color: #fff; color: #212529; }
+#helpModal .accordion-button:not(.collapsed){ background-color:#f8f9fa; }
+#helpModal .modal-body { max-height: min(70vh, 650px); overflow-y: auto; }
+
+/* ---- Compact Paid Tickets table (small, subtle) ---- */
+#paidTable.smart-table {
+  font-size: .92rem;
+}
+#paidTable.smart-table td,
+#paidTable.smart-table th {
+  line-height: 1.25;
+}
+#paidTable.smart-table > :not(caption) > * > * {
+  padding: .35rem .5rem; /* slightly tighter cells */
+}
+#paidTable thead th {
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+}
+
+/* status pill a bit slimmer */
+#paidTable .status-chip {
+  padding: .15rem .45rem;
+  font-size: .7rem;
+  gap: .25rem;
+}
+#paidTable .status-chip .bi { font-size: .9em; }
+
+/* tighten the wrapper spacing a touch */
+.table-wrap { margin-top: .25rem; }
+
+/* Mobile “cardified” view – slightly smaller cards for the paid table */
+@media (max-width: 576px) {
+  #paidTable.smart-table tbody tr {
+    margin: .5rem 0; /* was .65rem */
+    box-shadow: 0 6px 16px rgba(0,0,0,.05);
+  }
+  #paidTable.smart-table tbody tr td {
+    padding: .5rem .75rem !important; /* was .65rem .9rem */
+  }
+  #paidTable.smart-table tbody tr td::before {
+    font-size: .78rem; /* compact label text */
+  }
+}
